@@ -1,4 +1,4 @@
-package com.novo.fastlanedemo
+package com.novo.fastlane_demo
 
 import org.junit.Test
 
