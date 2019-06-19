@@ -14,12 +14,41 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-release-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-debug-rules.pro'
         }
     }
+
+    signingConfigs {
+        config
+    }
+
+}
+
+
+// set the keystore if we set the path
+if (KEYSTORE != "") {
+
+    // initialize the signing
+    android.signingConfigs.config.storeFile = file('../keystore/' + KEYSTORE)
+    android.signingConfigs.config.storePassword = STORE_PASSWORD
+    android.signingConfigs.config.keyAlias = KEY_ALIAS
+    android.signingConfigs.config.keyPassword = KEY_PASSWORD
+
+    // set this signing for both build types
+    android.buildTypes.release.signingConfig = android.signingConfigs.config
+    android.buildTypes.debug.signingConfig = android.signingConfigs.config
+
 }
 
 dependencies {
@@ -30,4 +59,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    def appCenterSdkVersion = '2.0.0'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 }

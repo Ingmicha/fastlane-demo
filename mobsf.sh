@@ -1,14 +1,15 @@
 # Authorization
 
-echo $1"dsasd"
+echo $1
+
 
 AUTH="f015a8410296a14427a739561c93b88a9b0b825c42804c0c4b992fff9ce0859e"
 
-FOLDER="android/$(date +%s)"
+FOLDER="$2/mobsf/backup/$(date +%s)"
 
 mkdir -p $FOLDER
 
-FILE_PATH="$FOLDER/Reporte.pdf"
+FILE_PATH="$FOLDER/reporte.pdf"
 
 URL_API="http://localhost:8000"
 
@@ -79,8 +80,12 @@ HTTP_STATU_DOWNLOAD=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS:
 
 done
 
+src="$FILE_PATH/reporte.pdf"
+dest="$2/mobsf"
+
+cp -rf  "$src" "$dest"
+
 echo
 echo "------------------------------ FINISH DOWNLOAD ------------------------------"
-echo "$FILE_PATH"
 
 #curl -v -o $TIMESTAMP.pdf  -X POST --url http://localhost:8000/api/v1/download_pdf --data "hash=$HASH&scan_type=$SCAN_TYPE" -H "Authorization:f015a8410296a14427a739561c93b88a9b0b825c42804c0c4b992fff9ce0859e"
