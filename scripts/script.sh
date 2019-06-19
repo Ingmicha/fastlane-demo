@@ -21,9 +21,9 @@ chmod +x ${propertiesFile}
 # update key properties based on build type
 if [ $buildType = 'debug' ]; then
 	(setProperty "KEYSTORE" "debug.jks")
-	(setProperty "STORE_PASSWORD" "d123456")
-	(setProperty "KEY_ALIAS" "debug")
-	(setProperty "KEY_PASSWORD" "d123456")
+	(setProperty "STORE_PASSWORD" "d12345")
+	(setProperty "KEY_ALIAS" "debug_2")
+	(setProperty "KEY_PASSWORD" "d12345")
 elif [ $buildType = 'release' ]; then
 	(setProperty "KEYSTORE" "release.jks")
 	(setProperty "STORE_PASSWORD" "$storePass")
